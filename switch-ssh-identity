@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+echo "Switching SSH identity..."
+#git config --global credential.helper store
+mv -vn ~/.ssh/config ~/.ssh/config.tmp
+mv -vn ~/.ssh/config.off ~/.ssh/config
+mv -vn ~/.ssh/config.tmp ~/.ssh/config.off
+echo "DONE - New config is:"
+cat ~/.ssh/config

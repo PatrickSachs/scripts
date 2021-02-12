@@ -1,0 +1,24 @@
+#!/bin/bash
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -s|--separator) SEP="$2"; shift ;;
+	-v6) IPV6="1"; ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+if [[ "$IPV6" == "1" ]]; then
+  IP="$(curl -s https://api64.ipify.org)"
+  CHR=":"
+else
+  IP="$(curl -s https://api.ipify.org)"
+  CHR="\."
+fi
+
+if [[ "$SEP" != "" ]]; then
+  echo $IP | sed "s|${CHR}|${SEP}|g"
+else
+  printf $IP
+fi

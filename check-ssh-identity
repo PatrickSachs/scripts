@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "Checking current SSH identity..."
+cat ~/.ssh/config

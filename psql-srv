@@ -1,0 +1,8 @@
+#!/bin/bash
+MOUNT=$(realpath "$HOME/.local/opt/psql-db")
+mkdir -p "$MOUNT"
+BIND="127.0.0.1:5432"
+PGUSER=postgres
+PGPASSWORD=postgres
+echo "--- Database starting on $BIND, in directory $MOUNT (Username & database is $PGUSER, password is $PGPASSWORD) ---"
+docker run --name psql-srv -d -p $BIND:5432/tcp -v $MOUNT:/var/lib/postgresql/data -e POSTGRES_USER=$PGUSER -e POSTGRES_PASSWORD=$PGPASSWORD --rm postgres
